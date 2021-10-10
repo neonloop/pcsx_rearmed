@@ -1180,6 +1180,7 @@ void cdrReadInterrupt() {
 			 (cdr.Transfer[4 + 0] == cdr.File) && cdr.Channel != 255) {
 			int ret = xa_decode_sector(&cdr.Xa, cdr.Transfer+4, cdr.FirstSector);
 			if (!ret) {
+				cdr.m_locationChanged = FALSE;
 				cdrAttenuate(cdr.Xa.pcm, cdr.Xa.nsamples, cdr.Xa.stereo);
 				SPU_playADPCMchannel(&cdr.Xa);
 				cdr.FirstSector = 0;
